@@ -3,10 +3,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% block meta %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crimson Vine Cellars</title>
+    {% endblock %}
 
+    {% block extra_meta %}
+    {% endblock %}
+
+    <title>Crimson Vine Cellars {% block extra_title %}{% endblock %}</title>
+
+    {% block core_css %}
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
@@ -16,6 +23,10 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% endblock %}
+
+    {% block extra_css %}
+    {% endblock %}
     
 </head>
 
@@ -24,6 +35,9 @@
         <!-- Nav Bar -->
 
     </header>
+
+    {% block page_header %}
+    {% endblock %}
 
     <!-- displaying Django messages -->
     <div class="container">
@@ -96,11 +110,18 @@
         </div>
     </footer>
 
+    {% block core_js %}
     <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.min.js"></script>
 
-    <!-- Base js -->
+    <!-- Base JS -->
+    <script src="{% static 'js/base.js' %}"></script>
+    {% endblock %}
 
-    {% block extras %}
+    {% block extra_js %}
     {% endblock %}
 
 </body>
