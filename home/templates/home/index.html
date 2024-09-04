@@ -2,6 +2,76 @@
 {% load static %}
 
 {% block content %}
-<!-- homepage.html content starts here -->
-    <h1 class="display-4 text-sucess">It Works</h1>
+    <!-- Display wines for all users -->
+    <div class="container mt-4 mb-4">
+        <div class="text-center">
+            <h2>Our Wines</h2>
+        </div>
+        <div id="wineCarousel" class="carousel slide" data-bs-ride="carousel">
+            <!-- Left arrow -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#wineCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+    
+            <!-- Wine carousel -->
+            <div class="carousel-inner">
+                {% if not wine_list %}
+                    <p class="text-center">No wines available at the moment.</p>
+                {% endif %}
+                
+                {% for wine in wine_list %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="row justify-content-center">
+                        {% for bottle in wine.bottle_list %}
+                        <div class="col-12 col-md-3 mb-4">
+                            <div class="card">
+                                <a href="{% url 'wine_detail' wine.slug %}" class="text-decoration-none">
+                                    <div class="card-body text-center">
+                                        <!-- Display wine rating -->
+                                        <div>
+                                            {% if wine.average_rating is None %}
+                                                <p>No ratings</p>
+                                            {% else %}
+                                                <p><i class="fas fa-star"></i> {{ wine.average_rating }}</p>
+                                            {% endif %}
+                                        </div>
+                                        
+                                        <!-- Wine bottle image -->
+                                        <div class="mt-2 mb-2">
+                                            {% if wine.bottle_image.url == 'https://res.cloudinary.com/dmnnucsdm/image/upload/placeholder' %}
+                                                <img class="img-fluid" src="{% static 'images/wine_default.jpg' %}" alt="Wine bottle" style="max-width: 100px;">
+                                            {% else %}
+                                                <img class="img-fluid" src="{{ wine.bottle_image.url }}" alt="{{ wine.title }}" style="max-width: 100px;">
+                                            {% endif %}
+                                        </div>
+    
+                                        <!-- Wine details -->
+                                        <div>
+                                            <p class="mb-1">{{ wine.title }}</p>
+                                            <p class="text-muted mb-0">- {{ wine.winery }}</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+    
+            <!-- Right arrow -->
+            <button class="carousel-control-next" type="button" data-bs-target="#wineCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    
+        <!-- See all wines button -->
+        <div class="text-center mt-4">
+            <a href="{{ home }}" class="btn btn-primary">See all wines</a>
+        </div>
+    </div>
+
 {% endblock %}
