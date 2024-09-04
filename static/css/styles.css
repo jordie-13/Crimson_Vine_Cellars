@@ -1,0 +1,80 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Set minimum height to fill the viewport */
+}
+
+header {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+nav {
+    margin: 0 auto;
+    padding: 10px 20px;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+
+/* Wine Banner Styling */
+.wine-banner {
+    padding: 4rem 1rem;
+    margin-bottom: 2rem;
+    max-width: 1400px;
+}
+
+.banner-text-box {
+    padding: 2rem;
+}
+
+.banner-image {
+    max-width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+/* Footer Styles */
+footer {
+    background-color: #000; /* Already set in HTML */
+}
+
+.social-links i {
+    transition: color 0.3s;
+}
+
+.social-links a:hover i {
+    color: #acdbdc;
+}
+
+.page-links a:hover {
+    color: #acdbdc; 
+}
+
+/* Headings in Footer */
+footer h2, footer h3 {
+    font-weight: bold;
+}
+
+footer h3 {
+    border-bottom: 1.5px solid;
+    padding-bottom: 10px;
+}
+
+/* Footer Links */
+footer a:hover {
+    color: #acdbdc;
+}
+
+/* Responsive Adjustments for Footer Columns */
+@media (max-width: 992px) {
+    footer .col-lg-4 {
+        text-align: center;
+    }
+}
