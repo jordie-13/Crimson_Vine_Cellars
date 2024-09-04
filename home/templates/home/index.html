@@ -74,4 +74,32 @@
         </div>
     </div>
 
+    <!-- Why choose us section  -->
+    <div class="container-fluid wine-banner">
+        <div class="row align-items-center flex-column flex-md-row">
+            <!-- Text Section -->
+            <div class="col-md-6 text-center text-md-start">
+                <div class="banner-text-box wine-text">
+                    <h2><strong>Why Choose Crimson Wines?</strong></h2>
+                    <p>At Crimson Vine Cellars we believe that great wine begins with the land. 
+                        Nestled in the heart of the Adelaide Hills, our vineyard is nurtured by rich soils, abundant sunshine, 
+                        and a passion for winemaking that has been passed down through generations. 
+                        Every grape is handpicked with care, ensuring that only the finest make it into our bottles. 
+                        From vine to glass, we craft wines that embody the spirit of our region—bold, elegant, and full of character. 
+                        Whether you're enjoying a glass at sunset or celebrating life's special moments, our wines bring a touch 
+                        of timeless craftsmanship to every occasion.
+                    </p>               
+                    <a href="{{ home }}" class="btn btn-primary">Explore Our Wines</a>
+                </div>
+            </div>
+    
+            <!-- Image Section -->
+            <div class="col-md-6 text-center mt-3 mt-md-0">
+                <picture>
+                    <img src="{% static 'images/wine-being-poured.jpg' %}" alt="Crimson Wines Vineyard" class="banner-image img-fluid">
+                </picture>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
