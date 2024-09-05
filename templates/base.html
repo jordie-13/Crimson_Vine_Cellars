@@ -1,6 +1,7 @@
 {% load static %}
 
 {% url 'home' as home_url %}
+{% url 'product_list' as products_url %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +47,7 @@
                 <hr>
                 <ul class="navbar-nav mx-auto navbar-nav-center">
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == home_url %}active{% endif %}" href="{{ home_url }}">All Wines</a>
+                        <a class="nav-link {% if request.path == products_url %}active{% endif %}" href="{{ products_url }}">All Wines</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == home_url %}active{% endif %}" href="{{ home_url }}">Our Story</a>
