@@ -1,8 +1,10 @@
 {% load static %}
 
 {% url 'home' as home_url %}
+{% url 'about_us' as about_url %}
 {% url 'product_list' as product_list_url %}
 {% url 'product_details' as product_details_url %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +53,7 @@
                         <a class="nav-link {% if request.path == product_list_url %}active{% endif %}" href="{{ product_list_url }}">All Wines</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {% if request.path == home_url %}active{% endif %}" href="{{ home_url }}">Our Story</a>
+                        <a class="nav-link {% if request.path == about_url %}active{% endif %}" href="{{ about_url }}">Our Story</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == home_url %}active{% endif %}" href="{{ home_url }}">Visit Us</a>
@@ -148,9 +150,9 @@
                 <div class="col-lg-4 col-md-12 footer-column mb-4">
                     <h3>Explore</h3>
                     <ul class="page-links list-unstyled">
-                        <li><a href="/" class="text-reset text-decoration-none" aria-label="Home page">Home</a></li>
-                        <li><a href="/" class="text-reset text-decoration-none" aria-label="Books page">Wines</a></li>
-                        <li><a href="/" class="text-reset text-decoration-none" aria-label="About us page">About Us</a></li>
+                        <li><a href="{{ home_url }}" class="text-reset text-decoration-none" aria-label="Home page">Home</a></li>
+                        <li><a href="{{ product_list_url }}" class="text-reset text-decoration-none" aria-label="Books page">Wines</a></li>
+                        <li><a href="{{ about_url }}" class="text-reset text-decoration-none" aria-label="About us page">About Us</a></li>
                         <li><a href="/" class="text-reset text-decoration-none" aria-label="Request a book page">Host an event with us</a></li>
                     </ul>
                 </div>
