@@ -9,6 +9,44 @@
 
 {% block content %}
 <div class="container mt-3">
+    <div class="row mb-4">
+        <!-- Filters Section -->
+        <div class="dropdown">
+            <button id="dropdown-btn" class="dropdown-btn btn btn-secondary">Filter By</button>
+            <div id="dropdown-content" class="dropdown-content m-3">
+                <!-- Category Dropdown -->
+                <div class="form-group m-3">
+                    <label for="category">Category:</label>
+                    <select id="category" name="category" class="form-control">
+                        <option value="">All Categories</option>
+                        {% for category in categories %}
+                            <option value="{{ category.name }}" {% if category.name == request.GET.category %}selected{% endif %}>{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+        
+                <!-- Rating Dropdown -->
+                <div class="form-group m-3">
+                    <label for="rating">Rating:</label>
+                    <select id="rating" name="rating" class="form-control">
+                        <option value="">All Ratings</option>
+                        <option value="1" {% if request.GET.rating == '1' %}selected{% endif %}>1</option>
+                        <option value="2" {% if request.GET.rating == '2' %}selected{% endif %}>2</option>
+                        <option value="3" {% if request.GET.rating == '3' %}selected{% endif %}>3</option>
+                        <option value="4" {% if request.GET.rating == '4' %}selected{% endif %}>4</option>
+                        <option value="5" {% if request.GET.rating == '5' %}selected{% endif %}>5</option>
+                    </select>
+                </div>
+        
+                <!-- Submit Button -->
+                 <div class="form-group m-3">
+                    <button type="submit" class="btn btn-primary me-2">Apply Filters</button>
+                    <a href="{% url 'product_list' %}" class="btn btn-secondary">Clear Filters</a>
+                 </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         {% if wines %}
             {% for wine in wines %}
@@ -47,4 +85,8 @@
         {% endif %}
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/product_list.js' %}"></script>
 {% endblock %}

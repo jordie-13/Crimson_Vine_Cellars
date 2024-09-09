@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Wine
+from .models import Wine, Category
 from datetime import datetime
 
 
@@ -13,10 +13,23 @@ def product_list(request):
     Returns:
         HttpResponse: The rendered template with the list of wines.
     """
-    wines = Wine.objects.all()  
+    # Fetch all Wine and Category items
+    wines = Wine.objects.all() 
+    categories = Category.objects.all() 
+
+    # Fetch all Wine items with optional filters
+    category_filter = request.GET.get('category')
+    rating_filter = request.GET.get('rating')
+
+    if category_filter:
+        wines = wines.filter(category__name=category_filter)
+
+    if rating_filter:
+        wines = wines.filter(rating__gte=rating_filter)
+
     context = {
         'wines': wines,
-        'current_year': datetime.now().year,
+        'categories': categories,
     }
     return render(request, 'product_list.html', context)
 

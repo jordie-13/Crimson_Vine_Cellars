@@ -130,6 +130,7 @@ footer a:hover {
     overflow: hidden;
 }
 
+/* Hide wine info section initially using opacitiy */
 .wine-info {
     position: absolute;
     bottom: 0;
@@ -146,6 +147,7 @@ footer a:hover {
     transition: opacity 0.3s ease;
 }
 
+/* Reveal item info section */
 .wine-item:hover .wine-info {
     opacity: 1;
 }
@@ -155,6 +157,23 @@ footer a:hover {
     z-index: 1;
 }
 
+/* Hide filter options dropdowns initially */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Show dropdown content when dropdown is hovered */
+.dropdown-content.show {
+    display: block;
+}
+
+
+
 
 
 @media (max-width: 992px) {
@@ -162,5 +181,3 @@ footer a:hover {
         text-align: center;
     }
 }
-
-
