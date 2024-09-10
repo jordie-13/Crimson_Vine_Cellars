@@ -32,16 +32,26 @@ def product_list(request):
     wines = Wine.objects.all() 
     categories = Category.objects.all() 
 
-    # Fetch all Wine items with optional filters
+    # Fetch all filter inputs
     category_filter = request.GET.get('category')
-    rating_filter = request.GET.get('rating')
+    price_min = request.GET.get('price_min')
+    price_max = request.GET.get('price_max')
+    available = request.GET.get('available')
 
     # Apply category, price and availability filters
     if category_filter:
         wines = wines.filter(category__name=category_filter)
-
-    if rating_filter:
-        wines = wines.filter(rating__gte=rating_filter)
+    if price_min:
+        wines = wines.filter(price__gte=price_min)
+    if price_max:
+        wines = wines.filter(price__lte=price_max)
+        # Handle availability filter
+    if available is not None:
+        # Only filter by availability if it is explicitly set
+        if available.lower() == 'true':
+            wines = wines.filter(available=True)
+        elif available.lower() == 'false':
+            wines = wines.filter(available=False)
 
     # Get the sorting parameter
     sort = request.GET.get('sort')
