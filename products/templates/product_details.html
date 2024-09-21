@@ -39,10 +39,25 @@
                 <p><strong>Closure</strong> <br> {{ wine.get_closure_display }}</p>
                 <hr>
                 <!-- Add to Basket Form -->
-                <form action="" method="post">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-primary">Add to Basket</button>
-                </form>
+                <p class="mt-3">{{ wine.description }}</p>
+                    <form class="form" action="{% url 'add_to_bag' wine.id %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="col-12">
+                                <p class="mt-3"><strong>Quantity:</strong></p>
+                                <div class="form-group w-50">
+                                    <div class="input-group">
+                                        <input class="form-control qty_input" type="number" name="quantity" value="1" min="1" max="99" data-item_id="{{ product.id }}" id="id_qty_{{ product.id }}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="Add to Bag">
+                            </div>
+                            <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                        </div>
+                    </form>
             </div>
         </div>
     </div>
@@ -93,12 +108,166 @@
         </div>
     </div>
 
-    <!-- Reviews Carousel -->
-    <div class="row mb-5">
-        <div id="reviewsCarousel">
-            <h2>Reviews</h2>
-            <p>Coming Soon</p>
+    <!-- Reviews -->
+    <div class="reviews-container">
+        <!-- Comments Section -->
+        <div class="row mt-2">
+            <div class="col-12">
+                <hr>
+                <strong class="text-secondary">
+                    {% if review_count == 1 %}
+                        <i class="far fa-comments"></i> {{ review_count }} Comment
+                    {% else %}
+                        <i class="far fa-comments"></i> {{ review_count }} Comments
+                    {% endif %}
+                </strong>
+            </div>
+        </div>
+        <div class="row mt-3 d-flex align-items-stretch">
+            <div class="col-md-8 mb-3 review-container">
+                <h3>Reviews</h3>
+                {% if review_count == 0 %}
+                    <p>Be the first to leave a comment</p>
+                {% endif %}
+                {% for review in reviews %}
+
+
+                    <div class="review-card mb-3 {% if not review.approved and review.user == user %} faded {% elif not review.approved %} d-none {% endif %}">
+                        <div class="card-body">
+                            <p class="font-weight-bold">
+                                Author: {{ review.user }}
+                            </p>
+                            <div id="review{{ review.id }}">
+                                {{ review.comment | linebreaks }}
+                            </div>
+                            <span class="font-weight-normal">Posted on {{ review.created_at }}</span>
+                            {% if not review.approved and review.user == user %}
+                                <p class="text-warning">This comment is awaiting approval</p>
+                            {% endif %}
+                            {% if user.is_authenticated and review.user == user %}
+                                <button class="btn btn-danger btn-delete" data-comment_id="{{ review.id }}">Delete</button>
+                                <button class="btn btn-secondary btn-edit" data-comment_id="{{ review.id }}">Edit</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+
+            <!-- not done yet 11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111 -->
+    <!-- Create a review form in forms.py to allow user to add a comment and rating -->
+            <!-- Leave a Comment and Rating Form -->
+            <div class="col-md-4 d-flex flex-column">
+                <div class="add-comment-card mb-3 flex-grow-1">
+                    <div class="card-body">
+                        {% if user.is_authenticated %}
+                            <!-- Comment Section -->
+                            <h3>Write a Review:</h3>
+                            <span><i class="far fa-user"></i> {{ user.username }}</span>
+                            <form id="reviewForm" method="post">
+                                {{ review_form }}
+                                {% csrf_token %}
+                                <button id="submitButton" type="submit" class="btn btn-secondary btn-lg mt-2">Submit</button>
+                            </form>
+                            <!-- Rating Section -->
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <hr>
+                                    <strong>Please rate this Bottle:</strong>
+                                    <div class="rating-stars mt-2">
+                                        <form id="ratingForm1" class="star-form" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="rating" value="1">
+                                            <button type="submit" class="far fa-star star-icon" data-value="1"></button>
+                                        </form>
+                                        <form id="ratingForm2" class="star-form" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="rating" value="2">
+                                            <button type="submit" class="far fa-star star-icon" data-value="2"></button>
+                                        </form>
+                                        <form id="ratingForm3" class="star-form" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="rating" value="3">
+                                            <button type="submit" class="far fa-star star-icon" data-value="3"></button>
+                                        </form>
+                                        <form id="ratingForm4" class="star-form" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="rating" value="4">
+                                            <button type="submit" class="far fa-star star-icon" data-value="4"></button>
+                                        </form>
+                                        <form id="ratingForm5" class="star-form" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="rating" value="5">
+                                            <button type="submit" class="far fa-star star-icon" data-value="5"></button>
+                                        </form>
+                                    </div>
+                                    
+
+                                    <div class="mt-2">
+                                        <p>Your rating: <span id="user-rating">{{ user_rating }}</span></p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        {% else %}
+                            <p>Log in to leave a comment and/or a rating</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" 
+    aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" 
+                  id="deleteModalLabel">Delete comment?</h5>
+                <button type="button" class="btn-close" 
+                  data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete your comment? 
+                This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" 
+                  data-bs-dismiss="modal">Close</button>
+                <a id="deleteConfirm" href="#" class="btn 
+                  btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 {% endblock %}

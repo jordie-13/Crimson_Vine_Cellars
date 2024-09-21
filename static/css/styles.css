@@ -195,6 +195,12 @@ footer a:hover {
     width: 100%;
 }
 
+.btn-outline-black {
+    background: white;
+    color: black !important; /* use important to override link colors for <a> elements */
+    border: 1px solid black;
+}
+
 @media (max-width: 992px) {
     footer .col-lg-4 {
         text-align: center;

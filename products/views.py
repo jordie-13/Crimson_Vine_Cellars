@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Wine, Category
 from datetime import datetime
+from reviews.models import Review
 
 
 def product_list(request):
@@ -76,4 +77,14 @@ def product_details(request, wine_id):
     View to display the details of a single wine item and handle adding it to user basket.
     """
     wine = get_object_or_404(Wine, id=wine_id)
-    return render(request, 'product_details.html', {'wine': wine})
+    
+    # Fetch reviews for the wine
+    reviews = Review.objects.filter(wine=wine)
+    review_count = wine.reviews.filter(approved=True).count()
+    
+    context = {
+        'wine': wine,
+        'reviews': reviews,
+        'review_count': review_count,
+    }
+    return render(request, 'product_details.html', context)

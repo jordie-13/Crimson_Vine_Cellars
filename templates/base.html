@@ -4,6 +4,7 @@
 {% url 'about_us' as about_url %}
 {% url 'product_list' as product_list_url %}
 {% url 'product_details' as product_details_url %}
+{% url 'view_bag' as bag_url %}
 
 
 <!DOCTYPE html>
@@ -74,6 +75,12 @@
                             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
                         </form>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == bag_url %}active{% endif %}" href="{{ bag_url }}">
+                            <i class="fas fa-shopping-basket"></i> <!-- Basket icon -->
+                        </a>
+                    </li>
                         
                     {% if user.is_authenticated %}
                     <li class="nav-item">
@@ -81,11 +88,7 @@
                             <i class="fas fa-user"></i> <!-- Profile icon -->
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.path == home_url %}active{% endif %}" href="{{ home_url }}">
-                            <i class="fas fa-shopping-basket"></i> <!-- Basket icon -->
-                        </a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == logout_url %}active{% endif %}" href="{% url 'account_logout' %}">Logout</a>
                     </li>
