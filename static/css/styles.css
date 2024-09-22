@@ -22,6 +22,12 @@ nav {
     align-items: center; 
 }
 
+/* Button styling */
+.btt-link,
+.update-link,
+.remove-item {
+    cursor: pointer;
+}
 
 /* Wine Banner Styling */
 .wine-banner {
