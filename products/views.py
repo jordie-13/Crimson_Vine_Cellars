@@ -69,7 +69,7 @@ def product_list(request):
         'wines': wines,
         'categories': categories,
     }
-    return render(request, 'product_list.html', context)
+    return render(request, 'products/product_list.html', context)
 
 
 def product_details(request, wine_id):
@@ -87,4 +87,4 @@ def product_details(request, wine_id):
         'reviews': reviews,
         'review_count': review_count,
     }
-    return render(request, 'product_details.html', context)
+    return render(request, 'products/product_details.html', context)
