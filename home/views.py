@@ -11,3 +11,8 @@ def about_us(request):
     """ A view to return the about us page """
     
     return render(request, 'about_us.html')
+
+def access_denied(request):
+    """A view to return access denied page"""
+
+    return render(request, 'home/access_denied.html')

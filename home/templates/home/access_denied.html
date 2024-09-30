@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_title %}
+| Access Denied
+{% endblock %}
+
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row access-denied-container">
+        <img src="{% static 'images/no-access.jpg' %}" alt="Access Denied" class="access-denied-image">
+        <h2 class="access-denied-text">Access Denied<h2>
+        <p class="access-denied-text"> We're sorry, but you need to be 18 years or older to access this website. 
+            We take age restrictions seriously to ensure a safe and responsible environment for all visitors. Please come back when you reach the appropriate age. Thank you for your understanding!
+        </p>
+        <button class="leave-page-btn" onclick="window.location.href='https://www.google.com';">Leave this page</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.querySelectorAll('#main-navbar a').forEach(function(link) {
+        link.onclick = function(event) {
+            event.preventDefault();
+        };
+    });
+</script>
+{% endblock %}
