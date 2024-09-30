@@ -198,6 +198,86 @@ footer a:hover {
     font-size: 1rem; 
 }
 
+/* Modal styles */
+.modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 15px 20px; /* Reduced padding */
+    border-radius: 8px;
+    text-align: center;
+    width: 300px; /* Slimmer width */
+    max-width: 90%; /* Ensures responsiveness on smaller screens */
+  }
+  
+  button {
+    padding: 8px 12px; /* Adjusted padding for buttons */
+    margin: 5px;
+    cursor: pointer;
+  }
+
+/* Access denial page style */
+.access-heading{
+    text-align: center;
+    color: #333;
+}
+
+.access-denied-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.access-denied-text {
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.button-container {
+    display: flex;          /* Enable flexbox */
+    justify-content: center; /* Center items horizontally */
+    margin-top: 20px;      /* Adjust margin as needed */
+}
+
+.leave-page-btn {
+    margin-top: 20px;
+    padding: 8px 12px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+
+.leave-page-btn:hover {
+    background-color: #c82333;  /* Darker red on hover */
+}
+
+.access-denied-image {
+    max-width: 100%;
+    height: auto; 
+    width: 500px;
+    margin-bottom: 5px;
+}
+
 /* Product page styles */
 .wine-item {
     position: relative;
